@@ -18,6 +18,13 @@ const profiles = [
     website: 'example.com',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   },
+  {
+    id: 3,
+    name: 'Robin Williams',
+    categories: ['Medical', 'Education'],
+    website: 'example.com',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
   // Add more profiles as needed
 ];
 
@@ -58,7 +65,7 @@ export default function App() {
             </Animated.View>
           );
         } else {
-          return null;
+          return profile.id = 0;
         }
       })}
     </View>
@@ -83,7 +90,7 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
+    position: 'center',
   },
   name: {
     fontSize: 24,
