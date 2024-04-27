@@ -25,6 +25,20 @@ const profiles = [
     website: 'example.com',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   },
+  {
+    id: 4,
+    name: 'Robin Williams',
+    categories: ['Medical', 'Education'],
+    website: 'example.com',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    id: 5,
+    name: 'Robin Williams',
+    categories: ['Medical', 'Education'],
+    website: 'example.com',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
   // Add more profiles as needed
 ];
 
@@ -108,13 +122,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#eeeee4',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
   buttonText: {
-    color: '#fff',
+    color: '#21130d',
     fontWeight: 'bold',
   },
 });
