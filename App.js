@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Animated, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Animated, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -75,6 +75,8 @@ export default function App() {
                 <TouchableOpacity style={styles.button} onPress={() => handleSwipe('right')}>
                   <Text style={styles.buttonText}>Accept</Text>
                 </TouchableOpacity>
+                <Image> style= {style.tinyLogo}
+                source= {require('Profile-Icon-2.jpg')}</Image>
               </View>
             </Animated.View>
           );
@@ -85,6 +87,9 @@ export default function App() {
     </View>
   );
 }
+
+
+
 
 const styles = StyleSheet.create({
   container: {
