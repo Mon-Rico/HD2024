@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Animated, Dimensions } from 'react-native';
+// App.js
+import React, { useState, useRef } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Animated, Dimensions } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import Chat from './Chat';
 
 const { width } = Dimensions.get('window');
 
@@ -20,43 +25,44 @@ const profiles = [
   },
   {
     id: 3,
-    name: 'Robin Williams',
+    name: 'Peter Griffin',
     categories: ['Medical', 'Education'],
     website: 'example.com',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   },
-  {
-    id: 4,
-    name: 'Robin Williams',
-    categories: ['Medical', 'Education'],
-    website: 'example.com',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  },
-  {
-    id: 5,
-    name: 'Robin Williams',
-    categories: ['Medical', 'Education'],
-    website: 'example.com',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  },
-  // Add more profiles as needed
 ];
 
-export default function App() {
+const Stack = createStackNavigator();
+
+function ProfileScreen({ navigation }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const position = new Animated.ValueXY();
+  const position = useRef(new Animated.ValueXY()).current;
 
   const handleSwipe = (direction) => {
-    const newIndex = direction === 'right' ? currentIndex + 1 : currentIndex - 1;
-    Animated.timing(position, {
-      toValue: { x: direction === 'right' ? width : -width, y: 0 },
-      duration: 300,
-      useNativeDriver: false,
-    }).start(() => {
-      setCurrentIndex(newIndex);
-      position.setValue({ x: 0, y: 0 });
-    });
+    const newIndex = direction === 'right' ? currentIndex - 1 : currentIndex + 1;
+
+    // Stop swiping if accepted the last profile
+    if (direction === 'right' && currentIndex === profiles.length - 1) {
+      return;
+    }
+
+    // Continue swiping if rejected or accepted other profiles
+    if (newIndex >= 0 && newIndex < profiles.length) {
+      Animated.timing(position, {
+        toValue: { x: direction === 'right' ? width : -width, y: 0 },
+        duration: 300,
+        useNativeDriver: false,
+      }).start(() => {
+        setCurrentIndex(newIndex);
+        position.setValue({ x: 0, y: 0 });
+      });
+    }
   };
+
+  // Navigate to chat screen when Peter Griffin is accepted
+  if (currentIndex === 2) {
+    navigation.navigate('Chat');
+  }
 
   return (
     <View style={styles.container}>
@@ -75,8 +81,6 @@ export default function App() {
                 <TouchableOpacity style={styles.button} onPress={() => handleSwipe('right')}>
                   <Text style={styles.buttonText}>Accept</Text>
                 </TouchableOpacity>
-                <Image> style= {style.tinyLogo}
-                source= {require('Profile-Icon-2.jpg')}</Image>
               </View>
             </Animated.View>
           );
@@ -88,8 +92,16 @@ export default function App() {
   );
 }
 
-
-
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Profile">
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Chat" component={Chat} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -127,13 +139,15 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   button: {
-    backgroundColor: '#eeeee4',
+    backgroundColor: '#007bff',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
   buttonText: {
-    color: '#21130d',
+    color: '#fff',
     fontWeight: 'bold',
   },
 });
+
+export default App;
