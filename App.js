@@ -65,7 +65,7 @@ export default function App() {
             </Animated.View>
           );
         } else {
-          return profile.id = 0;
+          return null;
         }
       })}
     </View>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'center',
+    position: 'center', //center the card
   },
   name: {
     fontSize: 24,
