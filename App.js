@@ -1,5 +1,5 @@
 // App.js
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Animated, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -81,8 +81,6 @@ function ProfileScreen({ navigation }) {
                 <TouchableOpacity style={styles.button} onPress={() => handleSwipe('right')}>
                   <Text style={styles.buttonText}>Accept</Text>
                 </TouchableOpacity>
-                <Image style={styles.stretch} source={require('./Profile-Icon-2.jpg')}/>
-
               </View>
             </Animated.View>
           );
