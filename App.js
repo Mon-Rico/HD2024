@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Chat from './Chat';
+import Login from './Login';
 
 const { width } = Dimensions.get('window');
 
@@ -82,6 +83,9 @@ function ProfileScreen({ navigation }) {
                   <Text style={styles.buttonText}>Accept</Text>
                 </TouchableOpacity>
               </View>
+              <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+                  <Text style={styles.buttonText}>Login Page</Text>
+              </TouchableOpacity>
             </Animated.View>
           );
         } else {
@@ -98,6 +102,7 @@ function App() {
       <Stack.Navigator initialRouteName="Profile">
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
