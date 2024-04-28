@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useRef } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Animated, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,7 +11,6 @@ const profiles = [
   {
     id: 1,
     name: 'John Doe',
-    //
     categories: ['Sports', 'Technology'],
     website: 'example.com',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -20,7 +18,6 @@ const profiles = [
   {
     id: 2,
     name: 'Jane Smith',
-    //
     categories: ['Art', 'Music'],
     website: 'example.com',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -28,7 +25,6 @@ const profiles = [
   {
     id: 3,
     name: 'Peter Griffin',
-    //
     categories: ['Medical', 'Education'],
     website: 'example.com',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -60,6 +56,9 @@ function ProfileScreen({ navigation }) {
         position.setValue({ x: 0, y: 0 });
       });
     }
+    else{
+      throw OutOfBoundsException();
+    }
   };
 
   return (
@@ -71,6 +70,13 @@ function ProfileScreen({ navigation }) {
           return (
             <Animated.View key={profile.id} style={[styles.card, position.getLayout()]}>
               <Text style={styles.name}>{profile.name}</Text>
+              <View style={styles.categoriesContainer}>
+                {profile.categories.map((category, categoryIndex) => (
+                  <View key={categoryIndex} style={styles.category}>
+                    <Text style={styles.categoryText}>{category}</Text>
+                  </View>
+                ))}
+              </View>
               <Text style={styles.description}>{profile.description}</Text>
               <View style={styles.buttonsContainer}>
                 <TouchableOpacity style={styles.button} onPress={() => handleSwipe('left')}>
@@ -119,12 +125,26 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'center', //center the card
   },
   name: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+  },
+  categoriesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 8,
+  },
+  category: {
+    backgroundColor: '#007bff',
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginRight: 5,
+    marginBottom: 5,
+  },
+  categoryText: {
+    color: '#fff',
   },
   description: {
     fontSize: 16,
