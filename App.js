@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Animated, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Animated, Dimensions, Image } from 'react-native'; // Import Image component
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -8,12 +8,19 @@ import Login from './Login';
 
 const { width } = Dimensions.get('window');
 
+const images = {
+  'Red Cross America': require('./images/RedCross.png'),
+  // 'Jane Smith': require('./images/jane_smith.jpg'),
+  // 'Peter Griffin': require('./images/peter_griffin.jpg'),
+};
+
 const profiles = [
   {
     id: 1,
-    name: 'John Doe',
+    name: 'Red Cross America',
+    profileImage: images['Red Cross America'],
     categories: ['Sports', 'Technology'],
-    website: 'example.com',
+    website: 'https://www.redcross.org/volunteer/become-a-volunteer.html#step1',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   },
   {
@@ -56,9 +63,8 @@ function ProfileScreen({ navigation }) {
         setCurrentIndex(newIndex);
         position.setValue({ x: 0, y: 0 });
       });
-    }
-    else{
-      throw OutOfBoundsException();
+    } else {
+      throw new Error('OutOfBoundsException');
     }
   };
 
@@ -71,6 +77,8 @@ function ProfileScreen({ navigation }) {
           return (
             <Animated.View key={profile.id} style={[styles.card, position.getLayout()]}>
               <Text style={styles.name}>{profile.name}</Text>
+              {/* Image goes here */}
+              <Image source={profile.profileImage} style={styles.profileImage} />
               <View style={styles.categoriesContainer}>
                 {profile.categories.map((category, categoryIndex) => (
                   <View key={categoryIndex} style={styles.category}>
@@ -167,6 +175,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  profileImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    marginBottom: 10,
   },
 });
 
