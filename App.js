@@ -83,9 +83,6 @@ function ProfileScreen({ navigation }) {
                   <Text style={styles.buttonText}>Accept</Text>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
-                  <Text style={styles.buttonText}>Login Page</Text>
-              </TouchableOpacity>
             </Animated.View>
           );
         } else {
@@ -99,10 +96,10 @@ function ProfileScreen({ navigation }) {
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Profile">
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
