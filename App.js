@@ -44,7 +44,9 @@ function ProfileScreen({ navigation }) {
 
     // Stop swiping if accepted the last profile
     if (direction === 'right' && currentIndex === profiles.length - 1) {
-      return;
+      if (currentIndex === 2) {
+        navigation.navigate('Chat');
+      }
     }
 
     // Continue swiping if rejected or accepted other profiles
@@ -59,11 +61,6 @@ function ProfileScreen({ navigation }) {
       });
     }
   };
-
-  // Navigate to chat screen when Peter Griffin is accepted
-  if (currentIndex === 2) {
-    navigation.navigate('Chat');
-  }
 
   return (
     <View style={styles.container}>
