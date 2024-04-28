@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Chat from './Chat';
-import Login from './Login';
 
 const { width } = Dimensions.get('window');
 
@@ -13,6 +12,7 @@ const profiles = [
   {
     id: 1,
     name: 'John Doe',
+    //
     categories: ['Sports', 'Technology'],
     website: 'example.com',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -20,6 +20,7 @@ const profiles = [
   {
     id: 2,
     name: 'Jane Smith',
+    //
     categories: ['Art', 'Music'],
     website: 'example.com',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -27,6 +28,7 @@ const profiles = [
   {
     id: 3,
     name: 'Peter Griffin',
+    //
     categories: ['Medical', 'Education'],
     website: 'example.com',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -43,10 +45,8 @@ function ProfileScreen({ navigation }) {
     const newIndex = direction === 'right' ? currentIndex - 1 : currentIndex + 1;
 
     // Stop swiping if accepted the last profile
-    if (direction === 'right' && currentIndex === profiles.length - 1) {
-      if (currentIndex === 2) {
-        navigation.navigate('Chat');
-      }
+    if (direction === 'right') {
+      navigation.navigate('Chat');
     }
 
     // Continue swiping if rejected or accepted other profiles
@@ -93,8 +93,7 @@ function ProfileScreen({ navigation }) {
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} />
+      <Stack.Navigator initialRouteName="Profile">
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>
