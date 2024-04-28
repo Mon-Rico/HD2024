@@ -81,6 +81,8 @@ function ProfileScreen({ navigation }) {
                 <TouchableOpacity style={styles.button} onPress={() => handleSwipe('right')}>
                   <Text style={styles.buttonText}>Accept</Text>
                 </TouchableOpacity>
+                <Image style={styles.stretch} source={require('./Profile-Icon-2.jpg')}/>
+
               </View>
             </Animated.View>
           );
@@ -147,6 +149,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  stretch: {
+    width: 100,
+    height: 100,
   },
 });
 
