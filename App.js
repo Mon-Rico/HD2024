@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Chat from './Chat';
+import Login from './Login';
 
 const { width } = Dimensions.get('window');
 
@@ -99,8 +100,9 @@ function ProfileScreen({ navigation }) {
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Profile">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>
